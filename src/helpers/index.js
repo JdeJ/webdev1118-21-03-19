@@ -1,8 +1,8 @@
 import faker from 'faker';
 
-export const generateTask = () => {
+export const generateTask = (todo = faker.lorem.sentence()) => {
   return {
-    title: faker.lorem.sentence(),
+    title: todo,
     id: faker.random.uuid(),
     isDone: false,
   } 

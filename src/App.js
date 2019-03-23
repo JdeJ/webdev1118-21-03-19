@@ -3,15 +3,17 @@ import { generateTask } from './helpers'
 
 import './App.css';
 import TodoComponent from './components/TodoComponent';
+import AddTodo from './components/AddTodo';
 
 class App extends Component {
   state = {
-    todos: [generateTask(), generateTask()]
+    todos: [generateTask(), generateTask()],
   }
 
-  handleClick = () => {
+  handleTask = (todo) => {
     this.setState({
-      todos: [...this.state.todos, generateTask()]
+      todos: [...this.state.todos, generateTask(todo)],
+      todo: '',
     })
   }
 
@@ -34,13 +36,17 @@ class App extends Component {
     })
   }
 
+  
+
   render() {
+    const { todos } = this.state;
+    console.log('render');
     return (
       <div>
         <h1>Todo</h1>
-        <button onClick={this.handleClick}>add todo</button>
+        <AddTodo onClick={this.handleTask} />
         <ul>
-          {this.state.todos.map((todo, index) => {
+          {todos.map((todo, index) => {
             return <TodoComponent 
               key={index}
               todo={todo}

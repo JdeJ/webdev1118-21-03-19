@@ -5,11 +5,7 @@ export const generateTask = (todo = faker.lorem.sentence()) => {
     title: todo,
     id: faker.random.uuid(),
     isDone: false,
-  } 
-}
+  };
+};
 
-// import { generateTask } from './'
-
-// export default generateTask;
-// import generateTask from './'
-
+export default generateTask;

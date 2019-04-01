@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class TodoComponent extends Component {
+  handleDelete = () => {
+    this.props.onDelete(this.props.index);
+  };
 
-  handleDelete = (e) => {
-    this.props.paraEliminar(this.props.index);
-  }
-
-  handleComplete = (e) => {
+  handleComplete = () => {
     this.props.onComplete(this.props.index);
-  }
+  };
 
   render() {
-    const { todo: {title, isDone} } = this.props;
+    const {
+      todo: {title, isDone},
+    } = this.props;
     return (
       <li>
         <div>{!isDone ? title : <div>tarea completada</div>}</div>
@@ -23,5 +25,12 @@ class TodoComponent extends Component {
     );
   }
 }
+
+TodoComponent.propTypes = {
+  onDelete: PropTypes.func.isRequired,
+  onComplete: PropTypes.func.isRequired,
+  todo: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+};
 
 export default TodoComponent;

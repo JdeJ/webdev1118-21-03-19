@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { generateTask } from './helpers'
+import React, {Component} from 'react';
+import {generateTask} from './helpers';
 
 import './App.css';
 import TodoComponent from './components/TodoComponent';
@@ -8,38 +8,34 @@ import AddTodo from './components/AddTodo';
 class App extends Component {
   state = {
     todos: [generateTask(), generateTask()],
-  }
+  };
 
-  handleTask = (todo) => {
+  handleTask = todo => {
     this.setState({
       todos: [...this.state.todos, generateTask(todo)],
       todo: '',
-    })
-  }
+    });
+  };
 
-  delete = (index) => {
-    console.log('🤯🤯🤪', index);
+  delete = index => {
     this.state.todos.splice(index, 1);
-    console.log(this.state);
     this.setState({
       todos: [...this.state.todos],
-    })
-  }
+    });
+  };
 
-  handleComplete = (index) => {
-    const { todos } = this.state;
+  handleComplete = index => {
+    const {todos} = this.state;
 
     todos[index].isDone = !todos[index].isDone;
 
     this.setState({
       todos: [...todos],
-    })
-  }
-
-  
+    });
+  };
 
   render() {
-    const { todos } = this.state;
+    const {todos} = this.state;
     console.log('render');
     return (
       <div>
@@ -47,13 +43,15 @@ class App extends Component {
         <AddTodo onClick={this.handleTask} />
         <ul>
           {todos.map((todo, index) => {
-            return <TodoComponent 
-              key={index}
-              todo={todo}
-              index={index}
-              paraEliminar={this.delete}
-              onComplete={this.handleComplete}
-            />
+            return (
+              <TodoComponent
+                key={index}
+                todo={todo}
+                index={index}
+                onDelete={this.delete}
+                onComplete={this.handleComplete}
+              />
+            );
           })}
         </ul>
       </div>
